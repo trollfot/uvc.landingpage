@@ -1,0 +1,16 @@
+.landingimage {
+  float: left;
+}
+
+.startquote {
+  margin-left: 170px;
+}
+
+.topbar-inner, .topbar .fill {
+  background-color: #004994;
+  background-image: -moz-linear-gradient(center top , #004994, #004994);
+}
+
+.image-row {
+  margin-top: 25px;
+}

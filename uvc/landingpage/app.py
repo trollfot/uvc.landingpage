@@ -17,6 +17,8 @@ landing_css = Resource(library, 'landing.css')
 class StartSeite(uvcsite.Page):
     grok.context(uvcsite.IUVCSite)
     grok.name('index')
+    title = ""
+    description = ""
 
     def update(self):
         landing_css.need()

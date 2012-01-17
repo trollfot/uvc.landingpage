@@ -1,5 +1,5 @@
 <div id="landingpage">
-  <h1> Willkommen </h1>
-  <p> Hier können Sie Sachen machen </p>
+  <h1 tal:content="view.title">  </h1>
+  <p tal:content="view.description"> </p>
   <div tal:content="structure provider: uvc.ssi"> </div>
 </div>

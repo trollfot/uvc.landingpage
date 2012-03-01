@@ -40,6 +40,7 @@ class StartSeiteAdapters(uvcsite.Page):
     grok.name('index')
     title = ""
     description = ""
+    grok.baseclass()
 
     def my_iterator(self, l):
         i = 0
@@ -50,14 +51,6 @@ class StartSeiteAdapters(uvcsite.Page):
             if i == s - 1:
                 yield l[i],
             i += 2
-
-    def render(self):
-        template = getMultiAdapter((self, self.request), IPageTemplate)
-        return template()
-
-
-class StartSeiteTemplate(PageTemplate):
-    grok.view(StartSeiteAdapters)
 
 
 class IStartSeiteItems(Interface):

@@ -3,12 +3,15 @@
 
 import grok
 import uvcsite
+import uvcsite.browser
 
+from uvcsite.interfaces import IUVCSite
 from zope.component import getMultiAdapter
 from megrok.pagetemplate import PageTemplate
 from zope.pagetemplate.interfaces import IPageTemplate
 from fanstatic import Library, Resource
 from zope.interface import Interface
+from uvcsite.browser.layout.slots.components import Menu
 
 
 grok.templatedir('templates')
@@ -17,8 +20,8 @@ library = Library('uvc.landingpage', 'static')
 landing_css = Resource(library, 'landing.css')
 
 
-class StartSeiteMenus(uvcsite.Page):
-    grok.context(uvcsite.IUVCSite)
+class StartSeiteMenus(uvcsite.browser.Page):
+    grok.context(IUVCSite)
     grok.baseclass()
     grok.name('index')
     title = ""
@@ -35,8 +38,8 @@ class StartSeite(PageTemplate):
     grok.view(StartSeiteMenus)
 
 
-class StartSeiteAdapters(uvcsite.Page):
-    grok.context(uvcsite.IUVCSite)
+class StartSeiteAdapters(uvcsite.browser.Page):
+    grok.context(IUVCSite)
     grok.name('index')
     title = ""
     description = ""
@@ -59,7 +62,7 @@ class IStartSeiteItems(Interface):
     """
 
 
-class StartSeiteItems(uvcsite.Menu):
+class StartSeiteItems(Menu):
     grok.name('uvc.ssi')
     grok.implements(IStartSeiteItems)
 

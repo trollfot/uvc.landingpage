@@ -2,13 +2,15 @@
 # # Copyright (c) 2007-2011 NovaReto GmbH
 
 import grok
-import uvcsite
+import uvcsite.interfaces
+import uvcsite.browser
+import uvc.menus.components
 
 from zope.component import getMultiAdapter
 from megrok.pagetemplate import PageTemplate
 from zope.pagetemplate.interfaces import IPageTemplate
 from fanstatic import Library, Resource
-from zope.interface import Interface
+from zope.interface import Interface, implementer
 
 
 grok.templatedir('templates')
@@ -17,10 +19,10 @@ library = Library('uvc.landingpage', 'static')
 landing_css = Resource(library, 'landing.css')
 
 
-class StartSeiteMenus(uvcsite.Page):
-    grok.context(uvcsite.IUVCSite)
-    grok.baseclass()
+class StartSeiteMenus(uvcsite.browser.Page):
+    grok.context(uvcsite.interfaces.IUVCSite)
     grok.name('index')
+
     title = ""
     description = ""
 
@@ -31,12 +33,13 @@ class StartSeiteMenus(uvcsite.Page):
         template = getMultiAdapter((self, self.request), IPageTemplate)
         return template()
 
+
 class StartSeite(PageTemplate):
     grok.view(StartSeiteMenus)
 
 
-class StartSeiteAdapters(uvcsite.Page):
-    grok.context(uvcsite.IUVCSite)
+class StartSeiteAdapters(uvcsite.browser.Page):
+    grok.context(uvcsite.interfaces.IUVCSite)
     grok.name('index')
     title = ""
     description = ""
@@ -59,9 +62,9 @@ class IStartSeiteItems(Interface):
     """
 
 
-class StartSeiteItems(uvcsite.Menu):
+@implementer(IStartSeiteItems)
+class StartSeiteItems(uvc.menus.components.Menu):
     grok.name('uvc.ssi')
-    grok.implements(IStartSeiteItems)
 
     def my_iterator(self, l):
         i = 0

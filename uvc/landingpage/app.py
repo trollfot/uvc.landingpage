@@ -2,15 +2,18 @@
 # # Copyright (c) 2007-2011 NovaReto GmbH
 
 import grok
-import uvcsite.interfaces
-import uvcsite.browser
 import uvc.menus.components
+import uvcsite
+import uvcsite.browser
+import uvcsite.browser
+import uvcsite.interfaces
 
-from zope.component import getMultiAdapter
-from megrok.pagetemplate import PageTemplate
-from zope.pagetemplate.interfaces import IPageTemplate
 from fanstatic import Library, Resource
+from megrok.pagetemplate import PageTemplate
+from uvcsite.interfaces import IUVCSite
+from zope.component import getMultiAdapter
 from zope.interface import Interface, implementer
+from zope.pagetemplate.interfaces import IPageTemplate
 
 
 grok.templatedir('templates')
@@ -41,6 +44,7 @@ class StartSeite(PageTemplate):
 class StartSeiteAdapters(uvcsite.browser.Page):
     grok.context(uvcsite.interfaces.IUVCSite)
     grok.name('index')
+
     title = ""
     description = ""
     grok.baseclass()
